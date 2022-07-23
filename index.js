@@ -63,12 +63,20 @@ async function run() {
             const employee = await EmployeeCollection.updateOne(filter, updateDoc, option)
             res.send(employee);
         })
+        app.delete('/employees/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const employee = await EmployeeCollection.deleteOne(query);
+            res.send(employee)
+        })
+
         app.get('/update/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             const employee = await EmployeeCollection.findOne(query);
             res.send(employee);
         })
+
 
 
 
